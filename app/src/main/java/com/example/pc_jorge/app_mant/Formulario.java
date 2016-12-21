@@ -31,7 +31,6 @@ import java.util.Calendar;
  * Se recibe el argumento 'codigo' desde MainActivity, si es 0 sera un alta nueva, si recibe
  * otro codigo cargara los valores de los campos en el formulario para que puedan ser editados.
  */
-
 public class Formulario extends AppCompatActivity implements View.OnClickListener {
     String nombreBD="miBD";
     static String fecha="Fecha";
@@ -370,6 +369,7 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
          * @param month
          * @param day
          */
+
         public void onDateSet(DatePicker view, int year, int month, int day) {
             int mYear = year;
             int mMonth = month;
