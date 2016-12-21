@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="10dp">
+
+<ImageView
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:id="@+id/imageViewIcono"
+    android:src="@drawable/icono_mantenimiento"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_marginRight="10dp" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="@string/nombreIntervencionListView"
+    android:id="@+id/textView_NombreIntervencion_ListView"
+    android:layout_alignTop="@+id/imageViewIcono"
+    android:layout_toRightOf="@+id/imageViewIcono" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:text="@string/fechaIntervencionListView"
+    android:id="@+id/textView_Fecha_ListView"
+    android:layout_below="@+id/textView_NombreIntervencion_ListView"
+    android:layout_toRightOf="@+id/imageViewIcono"
+    android:layout_toEndOf="@+id/imageViewIcono" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:text="@string/descripcionListView"
+    android:id="@+id/textView_DescripcionListView"
+    android:layout_below="@+id/textView_Kmtrs_listView"
+    android:layout_alignLeft="@+id/textView_Fecha_ListView"
+    android:layout_alignStart="@+id/textView_Fecha_ListView"/>
+
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:text="Kmtrs"
+    android:id="@+id/textView_Kmtrs_listView"
+    android:layout_below="@+id/textView_Fecha_ListView"
+    android:layout_alignLeft="@+id/textView_Fecha_ListView"
+    android:layout_alignStart="@+id/textView_Fecha_ListView" />
+
+</RelativeLayout>
