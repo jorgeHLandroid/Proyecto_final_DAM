@@ -10,6 +10,7 @@ import android.os.Bundle;
  * Fragment con texto,icono,Aceptar y Cancelar.
  * Created by pc-Jorge on 25/08/2016.
  */
+
 public class Fragment extends DialogFragment {
     static Fragment newInstance (String title){
         Fragment fragment=new Fragment();
