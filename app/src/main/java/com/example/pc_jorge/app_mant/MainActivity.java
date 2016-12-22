@@ -14,8 +14,7 @@ import android.widget.Toast;
 
 /**
  * Abre listas y formulario y almacena informacion en la base de datos. Queda que aparezca activo
- * el radio button cuando se edita, que no se queden campos en blanco
- *
+ * el radio button cuando se edita, que no se queden campos en blanco*
  *
  */
 

@@ -84,9 +84,11 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         if(view.getId()== findViewById(R.id.button_AceptarFormulario).getId()) {
             if (codigoIntervencion==0){
                 guardarIntervencionNueva();
+                finish();
                 //abrirDialogo();
             }else{
                 guardarIntervencionEditada(codigoIntervencion);
+                finish();
             }
         }if(view.getId()==findViewById(R.id.button_Cancelar).getId()){
             finish();
@@ -135,15 +137,17 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
                 importeEditText.setText(String.valueOf(importe));
                 kilometrosEditText.setText(String.valueOf(kilometros));
                 descripcionEditText.setText(String.valueOf(descripcion));
+                //Activa un radiobutton u otro segun sea Averia o Intervencion
+                if(tipoString.equals("A")){
+                    radioButtonAveria.setChecked(true);
+                }else{
+                    radioButtonMantenimiento.setChecked(true);
+                }
             }
         }
     }
 
-    /*
-                                                                                                    Tengo que comprobar si necesito
-                                                                                                    los metodos doPositiveClick y
-                                                                                                    doNegtiveClick
-                                                                                                     */
+   //Recoge la opcion elegida en el DialogFragment
     public void doPositiveClick(){
         Toast.makeText(this, "Ha pulsado OK", Toast.LENGTH_SHORT).show();
     }
@@ -152,7 +156,11 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
     }
 
     /**
-     * Consulta todos los registros de la base de datos para comprobar si existen
+     * Consulta los codigos de las intervenciones almacenadas en la BD. Selecciona el primer numero disponible
+     * de menor a mayor para asignarlo a una nueva intervencion.
+     * Si la BD no tiene ningun registro el primer numero que se asiga sera el 1 dejando el 0 para
+     * indicar que se trata de un alta nueva.
+     *
      * Parametros de bd.query:
      * Nombre de la tabla.
      * Array con los nombres de campos.
@@ -162,7 +170,7 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
      * Clausula HAVING que podemos dejar a null si no los necesitamos.
      * Clausula ORDER BY que podemos dejar a null si no los necesitamos.
      *
-     * @return true si existen registros, false si no existen
+     * @return Codigo disponible para la nueva intervencion
      */
     protected int consultarCodigoBaseDatos(){
         int codigoNuevaIntervencion=0;//Almacena el codigo que se usara al grabar una intervencion nueva
@@ -212,6 +220,7 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         }else{
             tipo="A";
         }
+
         //Creamos un objeto de la clase auxiliar MiBaseDatosHelper
         MiBaseDatosHelper bdhelp =
                 new MiBaseDatosHelper(this, nombreBD, null, 1);
@@ -230,6 +239,20 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
             //Creamos el registro
             almacenarEnBaseDatos(codigo,nombre,fecha,tipo,importe,kilometros,descripcion,null,R.drawable.icono_mantenimiento);
         }
+        Toast.makeText(this, "Registro guardado con exito", Toast.LENGTH_SHORT).show();
+    }
+
+    //Comprueba que el valor del EditText  no es nulo.
+    private boolean validarTexto(String texto) {
+        String textoAvalidar=texto.replaceAll(" ","");
+        if (textoAvalidar.equals("")){
+            Toast.makeText(Formulario.this, "Ha entrado en if "+textoAvalidar, Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            Toast.makeText(Formulario.this, "Ha entrado en else "+textoAvalidar, Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
     }
 
     /**
@@ -251,24 +274,31 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         }else{
             tipo="A";
         }
-        //Creamos un objeto de la clase auxiliar MiBaseDatosHelper
-        MiBaseDatosHelper bdhelp =
-                new MiBaseDatosHelper(this, nombreBD, null, 1);
-        //Abrimos en modo lectura y escritura la base de datos 'MiBD'
-        SQLiteDatabase bd = bdhelp.getWritableDatabase();
-        //Si la base de datos esta abierta.
-        if(bd.isOpen()){
-            //Creamos el objeto ContentValues con los valores a actualizar del registro.
-            ContentValues miRegistro = new ContentValues();
-            miRegistro.put("FECHA", fecha);
-            miRegistro.put("NOMBRE", nombre);
-            miRegistro.put("TIPO",tipo);
-            miRegistro.put("IMPORTE", importe);
-            miRegistro.put("KILOMETROS",kilometros );
-            miRegistro.put("DESCRIPCION", descripcion);
-            //Actualizamos el registro.
-            bd.update("INTERVENCIONES", miRegistro, "CODIGO="+codigo, null);
-            bd.close();
+        //Confirmamos que se han rellenado todos los campos
+        if(!validarTexto(nombre)){
+            Toast.makeText(Formulario.this, "Debe introducir el nombre de la intervencion "+validarTexto(nombre), Toast.LENGTH_SHORT).show();
+                                                                                                    Log.d("","El valor de validar texto es: "+validarTexto(nombre));
+        }else{
+            //Creamos un objeto de la clase auxiliar MiBaseDatosHelper
+            MiBaseDatosHelper bdhelp =
+                    new MiBaseDatosHelper(this, nombreBD, null, 1);
+            //Abrimos en modo lectura y escritura la base de datos 'MiBD'
+            SQLiteDatabase bd = bdhelp.getWritableDatabase();
+            //Si la base de datos esta abierta.
+            if(bd.isOpen()){
+                //Creamos el objeto ContentValues con los valores a actualizar del registro.
+                ContentValues miRegistro = new ContentValues();
+                miRegistro.put("FECHA", fecha);
+                miRegistro.put("NOMBRE", nombre);
+                miRegistro.put("TIPO",tipo);
+                miRegistro.put("IMPORTE", importe);
+                miRegistro.put("KILOMETROS",kilometros );
+                miRegistro.put("DESCRIPCION", descripcion);
+                //Actualizamos el registro.
+                bd.update("INTERVENCIONES", miRegistro, "CODIGO="+codigo, null);
+                bd.close();
+            }
+            Toast.makeText(this, "Registro editado con exito", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -298,13 +328,13 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         //Creamos un objeto de la clase auxiliar MiBaseDatosHelper
         MiBaseDatosHelper bdhelp =
                 new MiBaseDatosHelper(this, nombreBD, null, 1);
-        Log.d("","BASE DE DATOS CREADA");
+                                                                                                     Log.d("","BASE DE DATOS CREADA");
         //Abrimos en modo lectura y escritura la base de datos 'MiBD'
         SQLiteDatabase bd = bdhelp.getWritableDatabase();
-        Log.d("","BASE DE DATOS INTENTA ABRIR");
+                                                                                                    Log.d("","BASE DE DATOS INTENTA ABRIR");
         //Si la base de datos esta abierta.
         if(bd.isOpen()){
-            Log.d("","BASE DE DATOS ABIERTA");
+                                                                                                    Log.d("","BASE DE DATOS ABIERTA");
             //Creamos el objeto ContentValues con los valores del registro.
             ContentValues miRegistro = new ContentValues();
             miRegistro.put("CODIGO", codigoPasado);
@@ -319,10 +349,13 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
             //Insertamos el registro.
             bd.insert("INTERVENCIONES", null, miRegistro);
             bd.close();
-            Toast.makeText(this, "Intervención guardada: "+codigoPasado, Toast.LENGTH_SHORT).show();
-            Log.d("","BASE DE DATOS CERRADA");
+                                                                                                    Log.d("","Intervención guardada: "+codigoPasado);
+                                                                                                    Log.d("","BASE DE DATOS CERRADA");
         }
     }
+
+
+
 
     //Abre el calendario creando un objeto de la clase anidada DatePickerFragment()
     public void showDatePickerDialog(View v) {
@@ -385,5 +418,7 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
             setFecha(fecha);
         }
     }
+
+
 }
 

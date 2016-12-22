@@ -99,18 +99,21 @@ public class MostrarIntervenciones extends AppCompatActivity {
         Intent intentAbrir=new Intent(this,Formulario.class);
         intentAbrir.putExtra("codigoIntervencion",codigo);
         startActivityForResult(intentAbrir,1);
+        finish();
     }
 
-    /**COMENTO ESTO PORQUE GENERABA UNA EXCEPCION. INTENTAR ARREGLAR
+    /**COMENTO ESTO PORQUE GENERABA UNA EXCEPCION. INTENTAR ARREGLAR(Finalmente he llamado a finish()
+     * en abrirFormulario() y vuelve a el Main).
      * Sobreescribo el metodo onResume para que cada vez que tenga el foco la activity
      * ejecute el metodo cargarlistas actualizando asi el contenido
+     *
 
      @Override
      protected void onResume(){
      super.onResume();
      this.onCreate(null);
      }
-     */
+    */
 
     /**
      * Metodo para rellenar los listView con los datos almacenados en la base de datos.
