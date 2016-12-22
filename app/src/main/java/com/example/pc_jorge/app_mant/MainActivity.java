@@ -13,8 +13,9 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 /**
- * Abre listas y formulario y almacena informacion en la base de datos. Queda que aparezca activo
- * el radio button cuando se edita, que no se queden campos en blanco*
+ * Abre listas y formulario y almacena informacion en la base de datos.
+ * Usar el metodo validarTexto para comprobar que se relllenan todos los EditText.
+ *
  *
  */
 
