@@ -13,8 +13,11 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 /**
+ *
  * Abre listas y formulario y almacena informacion en la base de datos.
- * Usar el metodo validarTexto para comprobar que se relllenan todos los EditText.
+ * 
+ Usar el metodo validarTexto para comprobar que se relllenan todos los EditText. cambiarreplaceAll por Trim
+ para que tambien elimine espacios en medio de la frase.
  *
  *
  */
