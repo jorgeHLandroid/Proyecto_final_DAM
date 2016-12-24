@@ -18,8 +18,8 @@ import android.widget.Toast;
  * Crear menu
  *
  *
- * @autor Jorge Huertas.
- * @version 0.3
+ *
+ *
  */
 
 public class MainActivity extends Activity implements OnClickListener{
