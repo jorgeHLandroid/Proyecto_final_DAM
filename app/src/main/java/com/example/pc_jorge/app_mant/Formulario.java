@@ -43,6 +43,8 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
     private int kilometrosPasado,drawableImageIdPasado,codigoPasado,codigoIntervencion;
     EditText nombreEditText,importeEditText,kilometrosEditText,descripcionEditText;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,11 +86,9 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         if(view.getId()== findViewById(R.id.button_AceptarFormulario).getId()) {
             if (codigoIntervencion==0){
                 guardarIntervencionNueva();
-                finish();
                 //abrirDialogo();
             }else{
                 guardarIntervencionEditada(codigoIntervencion);
-                finish();
             }
         }if(view.getId()==findViewById(R.id.button_Cancelar).getId()){
             finish();
@@ -205,102 +205,135 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
      * y los graba en la base de datos
      */
     public void guardarIntervencionNueva(){
-        String nombre,descripcion,fecha,tipo;
-        double importe;
-        int kilometros,codigo;
+        String nombre,importe,kilometros,descripcion,fecha,tipo;
+        double importeDouble;
+        int kilometrosInt,codigo;
         //Se recuperan los datos del formulario
         codigo=consultarCodigoBaseDatos();
         fecha=fechaClickableTextView.getText().toString();
         nombre=nombreEditText.getText().toString();
-        importe=Double.parseDouble(importeEditText.getText().toString());
-        kilometros=Integer.parseInt(kilometrosEditText.getText().toString());
+        importe=importeEditText.getText().toString();
+        kilometros=kilometrosEditText.getText().toString();
         descripcion=descripcionEditText.getText().toString();
         if(radioButtonMantenimiento.isChecked()){
             tipo="M";
         }else{
             tipo="A";
         }
-
-        //Creamos un objeto de la clase auxiliar MiBaseDatosHelper
-        MiBaseDatosHelper bdhelp =
-                new MiBaseDatosHelper(this, nombreBD, null, 1);
-        //Abrimos en modo lectura y escritura la base de datos 'MiBD'
-        SQLiteDatabase bd = bdhelp.getWritableDatabase();
-        //Si la base de datos esta abierta.
-        if(bd.isOpen()){
-            //Creamos el objeto ContentValues con los valores a actualizar del registro.
-            ContentValues miRegistro = new ContentValues();
-            miRegistro.put("FECHA", fecha);
-            miRegistro.put("NOMBRE", nombre);
-            miRegistro.put("TIPO",tipo);
-            miRegistro.put("IMPORTE", importe);
-            miRegistro.put("KILOMETROS",kilometros );
-            miRegistro.put("DESCRIPCION", descripcion);
-            //Creamos el registro
-            almacenarEnBaseDatos(codigo,nombre,fecha,tipo,importe,kilometros,descripcion,null,R.drawable.icono_mantenimiento);
-        }
-        Toast.makeText(this, "Registro guardado con exito", Toast.LENGTH_SHORT).show();
-    }
-
-    //Comprueba que el valor del EditText  no es nulo.
-    private boolean validarTexto(String texto) {
-        String textoAvalidar=texto.replaceAll(" ","");
-        if (textoAvalidar.equals("")){
-            Toast.makeText(Formulario.this, "Ha entrado en if "+textoAvalidar, Toast.LENGTH_SHORT).show();
-            return false;
-        }else{
-            Toast.makeText(Formulario.this, "Ha entrado en else "+textoAvalidar, Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-    }
-
-    /**
-     * Almacena la informacion introducida en el formulario de edicion de una intervencion y
-     * actualiza el registro que corresponde al codigo de la intervencion
-     */
-    protected void guardarIntervencionEditada(int codigoIntervencion){
-        String nombre,descripcion,fecha,tipo;
-        double importe;
-        int kilometros,codigo=codigoIntervencion;
-        //Se recuperan los datos del formulario
-        fecha=fechaClickableTextView.getText().toString();
-        nombre=nombreEditText.getText().toString();
-        importe=Double.parseDouble(importeEditText.getText().toString());
-        kilometros=Integer.parseInt(kilometrosEditText.getText().toString());
-        descripcion=descripcionEditText.getText().toString();
-        if(radioButtonMantenimiento.isChecked()){
-            tipo="M";
-        }else{
-            tipo="A";
-        }
-        //Confirmamos que se han rellenado todos los campos
-        if(!validarTexto(nombre)){
-            Toast.makeText(Formulario.this, "Debe introducir el nombre de la intervencion "+validarTexto(nombre), Toast.LENGTH_SHORT).show();
-                                                                                                    Log.d("","El valor de validar texto es: "+validarTexto(nombre));
-        }else{
+        //Solo grabara la intervencion si se validan todos los campos
+        String texto[]={fecha,nombre,kilometros,importe};
+        String textoInformativo[]={getString(R.string.Introduce_la_fecha),
+                getString(R.string.Introduce_el_nombre),
+                getString(R.string.Introduce_coste),
+                getString(R.string.Introduce_Klmtrs)};
+        if(validar(texto,textoInformativo )) {
+            importeDouble=Double.parseDouble(importeEditText.getText().toString());
+            kilometrosInt=Integer.parseInt(kilometrosEditText.getText().toString());
             //Creamos un objeto de la clase auxiliar MiBaseDatosHelper
             MiBaseDatosHelper bdhelp =
                     new MiBaseDatosHelper(this, nombreBD, null, 1);
             //Abrimos en modo lectura y escritura la base de datos 'MiBD'
             SQLiteDatabase bd = bdhelp.getWritableDatabase();
             //Si la base de datos esta abierta.
-            if(bd.isOpen()){
+            if (bd.isOpen()) {
                 //Creamos el objeto ContentValues con los valores a actualizar del registro.
                 ContentValues miRegistro = new ContentValues();
                 miRegistro.put("FECHA", fecha);
                 miRegistro.put("NOMBRE", nombre);
-                miRegistro.put("TIPO",tipo);
+                miRegistro.put("TIPO", tipo);
                 miRegistro.put("IMPORTE", importe);
-                miRegistro.put("KILOMETROS",kilometros );
+                miRegistro.put("KILOMETROS", kilometros);
                 miRegistro.put("DESCRIPCION", descripcion);
-                //Actualizamos el registro.
-                bd.update("INTERVENCIONES", miRegistro, "CODIGO="+codigo, null);
-                bd.close();
+                //Creamos el registro
+                almacenarEnBaseDatos(codigo, nombre, fecha, tipo, importeDouble, kilometrosInt, descripcion, null, R.drawable.icono_mantenimiento);
             }
-            Toast.makeText(this, "Registro editado con exito", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Guardado con exito", Toast.LENGTH_SHORT).show();
+            finish();//Cierro el Formulario
         }
     }
+
+
+
+    /**
+     * Almacena la informacion introducida en el formulario de edicion de una intervencion y
+     * actualiza el registro que corresponde al codigo de la intervencion
+     */
+    protected void guardarIntervencionEditada(int codigoIntervencion){
+        String nombre,importe,kilometros,descripcion,fecha,tipo;
+        double importeDouble;
+        int kilometrosInt,codigo=codigoIntervencion;
+        //Se recuperan los datos del formulario
+        fecha=fechaClickableTextView.getText().toString();
+        nombre=nombreEditText.getText().toString();
+        importe=importeEditText.getText().toString();
+        kilometros=kilometrosEditText.getText().toString();
+        descripcion=descripcionEditText.getText().toString();
+        if(radioButtonMantenimiento.isChecked()){
+            tipo="M";
+        }else{
+            tipo="A";
+        }
+
+        //Solo grabara la intervencion si se validan todos los campos
+        String texto[]={fecha,nombre,kilometros,importe};
+        String textoInformativo[]={getString(R.string.Introduce_la_fecha),
+                getString(R.string.Introduce_el_nombre),
+                getString(R.string.Introduce_coste),
+                getString(R.string.Introduce_Klmtrs)};
+        if(validar(texto,textoInformativo )) {
+            //Casting para grabarlo en la base de datos
+            importeDouble = Double.parseDouble(importeEditText.getText().toString());
+            kilometrosInt = Integer.parseInt(kilometrosEditText.getText().toString());
+            //Creamos un objeto de la clase auxiliar MiBaseDatosHelper
+            MiBaseDatosHelper bdhelp =
+                    new MiBaseDatosHelper(this, nombreBD, null, 1);
+            //Abrimos en modo lectura y escritura la base de datos 'MiBD'
+            SQLiteDatabase bd = bdhelp.getWritableDatabase();
+            //Si la base de datos esta abierta.
+            if (bd.isOpen()) {
+                //Creamos el objeto ContentValues con los valores a actualizar del registro.
+                ContentValues miRegistro = new ContentValues();
+                miRegistro.put("FECHA", fecha);
+                miRegistro.put("NOMBRE", nombre);
+                miRegistro.put("TIPO", tipo);
+                miRegistro.put("IMPORTE", importeDouble);
+                miRegistro.put("KILOMETROS", kilometrosInt);
+                miRegistro.put("DESCRIPCION", descripcion);
+                //Actualizamos el registro.
+                bd.update("INTERVENCIONES", miRegistro, "CODIGO=" + codigo, null);
+                bd.close();
+                Toast.makeText(Formulario.this, "Editado con exito", Toast.LENGTH_SHORT).show();
+                finish();//Cierra el formulario
+            }
+        }
+    }
+
+    /**
+     * Recibe 2 Arrays para comprobar que los String del Array1 no estan vacios y no coinciden con
+     * los textos informativos almacenados en el Array2
+     * @param ArrayString1 String obtenidos de los EditText
+     * @param ArrayString2 String con los textos informativos
+     * @return true si Array1 no contiene ningun String vacio ni coincide con frase informativa
+     */
+    public boolean validar(String[] ArrayString1,String[] ArrayString2){
+        String[] texto=ArrayString1;
+        String[] textoInformativo=ArrayString2;
+        for(int i=0; i<texto.length;i++){
+            String textoString=texto[i].replaceAll("\\s+", "");
+            for(int y=0;y<textoInformativo.length;y++){
+                String textoInformativoString=textoInformativo[y].replaceAll("\\s+", "");
+                if(textoString.equals("")||textoString.equals(textoInformativoString)){
+                                                                                                    Log.d("","Ha encontrado vacio o texto inf:  "+textoString);
+                    Toast.makeText(Formulario.this, getString(R.string.Debe_completar_todos_los_campos), Toast.LENGTH_SHORT).show();
+
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
 
     /**
      * Crea si no esta creada la base de datos, la abre y almacena los registros pasados por parametros

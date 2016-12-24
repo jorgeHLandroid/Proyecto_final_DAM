@@ -13,13 +13,13 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 /**
- *
- * Abre listas y formulario y almacena informacion en la base de datos.
- * 
- Usar el metodo validarTexto para comprobar que se relllenan todos los EditText. cambiarreplaceAll por Trim
- para que tambien elimine espacios en medio de la frase.
+ * Crear Fragment con ImageButton para elegir el icono de la intervencion
+ * Crear procedimiento para borrar intervencion
+ * Crear menu
  *
  *
+ * @autor Jorge Huertas.
+ * @version 0.3
  */
 
 public class MainActivity extends Activity implements OnClickListener{
@@ -39,8 +39,8 @@ public class MainActivity extends Activity implements OnClickListener{
         ImageButton botonSalirMainActivity=(ImageButton)findViewById(R.id.imageButton_Salir_MainActivity);
         botonSalirMainActivity.setOnClickListener(this);
 
-        ImageButton botonAñadirIntervencion =(ImageButton)findViewById(R.id.imageButton_Añadir_MainActivity);
-        botonAñadirIntervencion.setOnClickListener(this);
+        ImageButton botonAnadirIntervencion =(ImageButton)findViewById(R.id.imageButton_Anadir_MainActivity);
+        botonAnadirIntervencion.setOnClickListener(this);
 
     }
 
@@ -52,7 +52,7 @@ public class MainActivity extends Activity implements OnClickListener{
             abrirMostrarIntervenciones();
         } if (view.getId()==findViewById(R.id.imageButton_Salir_MainActivity).getId()){
             Cancelar();
-        }if(view.getId()==findViewById(R.id.imageButton_Añadir_MainActivity).getId()){
+        }if(view.getId()==findViewById(R.id.imageButton_Anadir_MainActivity).getId()){
             abrirFormulario(0);
         }
     }

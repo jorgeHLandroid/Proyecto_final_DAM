@@ -41,7 +41,7 @@ android:background="@drawable/fondo">
 <ImageButton
     android:layout_width="100dp"
     android:layout_height="100dp"
-    android:id="@+id/imageButton_Añadir_MainActivity"
+    android:id="@+id/imageButton_Anadir_MainActivity"
     android:scaleType="fitCenter"
     android:background="@android:color/transparent"
     android:src="@drawable/anyadir"

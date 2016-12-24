@@ -10,5 +10,14 @@
     <string name="KilometrosIntervencion">Kilómetros</string>
     <string name="Aceptar">Aceptar</string>
     <string name="Cancelar">Cancelar</string>
+    <string name="Introduce_la_fecha">Introduce la fecha</string>
+    <string name="Introduce_el_nombre">Introduce el nombre</string>
+    <string name="Introduce_coste">Coste</string>
+    <string name="Introduce_Klmtrs">Klmtrs</string>
+    <string name="Introduce_Descripción">Descripción</string>
+    <string name="Introduce_Averia">Averia</string>
+    <string name="Introduce_Mantenimiento">Mantenimiento</string>
+    <string name="Registro_editado_con_exito">Registro editado con exito</string>
+    <string name="Debe_completar_todos_los_campos">\t\t\tFaltan campos por completar.\nEl unico campo que no es obligatorio es la Descripción.</string>
 
 </resources>
