@@ -42,8 +42,8 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
     private double importePasado;
     private int kilometrosPasado,drawableImageIdPasado,codigoPasado,codigoIntervencion;
     EditText nombreEditText,importeEditText,kilometrosEditText,descripcionEditText;
-
-
+    //Indicara el tipo de icono de la intervencion es statico para accedera al metodo set desde otra clase.
+    private static int iconSelection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +85,9 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
         if(view.getId()== findViewById(R.id.button_AceptarFormulario).getId()) {
             if (codigoIntervencion==0){
-                guardarIntervencionNueva();
-                //abrirDialogo();
+                //guardarIntervencionNueva();
+                //abrirDialogoAdvertencia();
+                abrirDialogoIconos();
             }else{
                 guardarIntervencionEditada(codigoIntervencion);
             }
@@ -388,6 +389,9 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
     }
 
 
+    public static void setIconSelection(int icon){
+        iconSelection=icon;
+    }
 
 
     //Abre el calendario creando un objeto de la clase anidada DatePickerFragment()
@@ -396,10 +400,18 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         newFragment.show(getSupportFragmentManager(), "Elija la fecha de la intervención");
     }
     //Abre un dialogFragment con icono .Definido en la clase Fragment
-    public void abrirDialogo(){
+    public void abrirDialogoAdvertencia(){
         Fragment dialogFragment = Fragment
                 .newInstance("¿Has pulsado Aceptar.¿Deacuerdo??");
         dialogFragment.show(this.getFragmentManager(), "dialog");
+
+    }
+
+    //Abre dialogo de iconos
+    public void abrirDialogoIconos(){
+        SelectIconDialog dialogFragment = SelectIconDialog
+                .newInstance("Elije la clase  de intervencion");
+        dialogFragment.show(this.getSupportFragmentManager(),"dialogIconSelect");
 
     }
 
@@ -413,7 +425,8 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
     }
 
     /**
-     * Clase anidada. Crea un Fragment de tipo DatePicker para que el usuario eliga la fecha de la intervencion
+     * Clase anidada. Crea un Fragment de tipo DatePicker para que el usuario eliga la fecha de la intervencion.
+     *
      */
 
     public static class  DatePickerFragment extends DialogFragment
