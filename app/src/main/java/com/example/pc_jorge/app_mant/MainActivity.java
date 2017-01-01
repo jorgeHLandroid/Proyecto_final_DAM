@@ -73,6 +73,6 @@ public class MainActivity extends Activity implements OnClickListener{
     private void abrirFormulario(int codigo) {
         Intent intentAbrir = new Intent(MainActivity.this, Formulario.class);
         intentAbrir.putExtra("codigoIntervencion", codigo);
-        startActivityForResult(intentAbrir, 1);
+        startActivity(intentAbrir);
     }
 }

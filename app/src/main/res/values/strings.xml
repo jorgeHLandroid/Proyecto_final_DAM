@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Gestión de mantenimientos</string>
+    <string name="app_name">Mantenimiento de Vehículos</string>
     <string name="textView_ActividadesGuardadas">ACTIVIDADES GUARDADAS</string>
     <string name="NombreDelMantenimiento">Nombre del mantenimiento</string>
-    <string name="nombreIntervencionListView">Nombre de la intervención</string>
+    <string name="nombreIntervencionListView">Nombre de la intervención.</string>
     <string name="fechaIntervencionListView">00/00/00</string>
     <string name="descripcionListView">Descripción</string>
     <string name="TipoFormulario">Tipo</string>
@@ -17,7 +17,9 @@
     <string name="Introduce_Descripción">Descripción</string>
     <string name="Introduce_Averia">Averia</string>
     <string name="Introduce_Mantenimiento">Mantenimiento</string>
-    <string name="Registro_editado_con_exito">Registro editado con exito</string>
+    <string name="Registro_editado_con_exito">Registro editado con exito.</string>
     <string name="Debe_completar_todos_los_campos">\t\t\tFaltan campos por completar.\nEl unico campo que no es obligatorio es la Descripción.</string>
+    <string name="selecciona_un_icono">Selecciona un icono para la intervención</string>
+    <string name="Titulo_DialogIcon">Icono de la intervención</string>
 
 </resources>

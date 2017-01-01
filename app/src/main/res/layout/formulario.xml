@@ -36,7 +36,8 @@
         android:layout_column="0"
         android:layout_below="@+id/textView_FechaFormulario"
         android:layout_alignRight="@+id/textView_FechaFormulario"
-        android:layout_alignEnd="@+id/textView_FechaFormulario" />
+        android:layout_alignEnd="@+id/textView_FechaFormulario"
+        android:layout_toEndOf="@+id/imageButton_IconoFormulario" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,9 +47,8 @@
         android:id="@+id/textView_Tipo_Formulario"
         android:layout_row="2"
         android:layout_column="0"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="53dp"
         android:layout_below="@+id/editText_NombreFormulario"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -58,10 +58,9 @@
         android:ems="10"
         android:id="@+id/editText_Kilometros"
         android:text="@string/Introduce_Klmtrs"
-        android:layout_alignTop="@+id/textView_Tipo_Formulario"
-        android:layout_alignRight="@+id/editText_NombreFormulario"
-        android:layout_alignEnd="@+id/editText_NombreFormulario"
-        android:maxLength="6" />
+        android:maxLength="6"
+        android:layout_below="@+id/editText_NombreFormulario"
+        android:layout_alignEnd="@+id/editText_NombreFormulario" />
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -71,27 +70,6 @@
         android:layout_alignParentStart="true"
         android:id="@+id/radioGroup">
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Introduce_Averia"
-            android:id="@+id/radioButton_Averia"
-            android:checked="false"
-            android:layout_alignBottom="@+id/editText_Kilometros"
-            android:layout_toRightOf="@+id/radioGroup"
-            android:layout_toEndOf="@+id/radioGroup"
-            android:layout_marginTop="5dp" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Introduce_Mantenimiento"
-            android:id="@+id/radioButton_Mantenimiento"
-            android:checked="true"
-            android:layout_below="@+id/radioGroup"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="5dp" />
     </RadioGroup>
 
     <EditText
@@ -114,9 +92,9 @@
         android:id="@+id/textView_Descripcion_Formulario"
         android:layout_row="4"
         android:layout_column="0"
-        android:layout_below="@+id/editText_Importe"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp" />
+        android:layout_below="@+id/radioGroup2"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="match_parent"
@@ -137,19 +115,62 @@
         android:layout_height="wrap_content"
         android:text="@string/Aceptar"
         android:id="@+id/button_AceptarFormulario"
+        android:textAllCaps="false"
         android:layout_row="15"
         android:layout_column="0"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageButton_IconoFormulario"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:scaleType="fitStart"
+        android:src="@drawable/question"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroup2"
+        android:layout_below="@+id/editText_Importe"
+        android:layout_alignParentStart="true">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Introduce_Averia"
+            android:id="@+id/radioButton_Averia"
+            android:checked="false"
+            android:layout_below="@+id/editText_Importe"
+            android:layout_alignParentStart="true" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Introduce_Mantenimiento"
+            android:id="@+id/radioButton_Mantenimiento"
+            android:checked="true"
+            android:layout_below="@+id/radioButton_Averia"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="19dp" />
+    </RadioGroup>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Cancelar"
         android:id="@+id/button_Cancelar"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_row="15"
+        android:layout_column="0"
+        android:textAllCaps="false"
+        android:layout_alignBottom="@+id/button_AceptarFormulario"
         android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

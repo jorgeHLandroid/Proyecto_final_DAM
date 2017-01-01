@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -37,6 +38,8 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
     static TextView fechaClickableTextView;
     TextView descripcionTextView;
     RadioButton radioButtonMantenimiento,radioButtonAveria;
+    Button  botonAceptar,botonCancelar;
+    static ImageButton buttonIcon;
     //variables para insertar en la BD
     private String nombrePasado,fechaPasado,descripcionPasado,rutaImagenPasado,tipoPasado;
     private double importePasado;
@@ -65,10 +68,12 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         radioButtonAveria=(RadioButton)findViewById(R.id.radioButton_Averia);
         radioButtonMantenimiento=(RadioButton)findViewById(R.id.radioButton_Mantenimiento);
 
-        Button botonAceptar=(Button)findViewById(R.id.button_AceptarFormulario);
+        botonAceptar=(Button)findViewById(R.id.button_AceptarFormulario);
         botonAceptar.setOnClickListener(this);
-        Button botonCancelar=(Button)findViewById(R.id.button_Cancelar);
+        botonCancelar=(Button)findViewById(R.id.button_Cancelar);
         botonCancelar.setOnClickListener(this);
+        buttonIcon=(ImageButton)findViewById(R.id.imageButton_IconoFormulario);
+        buttonIcon.setOnClickListener(this);
 
         //Recojo el codigo pasado por el listView
         Intent intentRecibir=getIntent();
@@ -85,9 +90,9 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
         if(view.getId()== findViewById(R.id.button_AceptarFormulario).getId()) {
             if (codigoIntervencion==0){
-                //guardarIntervencionNueva();
+                guardarIntervencionNueva();
                 //abrirDialogoAdvertencia();
-                abrirDialogoIconos();
+                //abrirDialogoIconos();
             }else{
                 guardarIntervencionEditada(codigoIntervencion);
             }
@@ -95,6 +100,9 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
             finish();
         }if(view.getId()==findViewById(R.id.textView_FechaFormulario).getId()){
             showDatePickerDialog(view);
+        }
+        if (view.getId() == findViewById(R.id.imageButton_IconoFormulario).getId()) {
+            new Dialog_Iconos().show(getSupportFragmentManager(), "Elige un icono");
         }
     }
 
@@ -138,6 +146,7 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
                 importeEditText.setText(String.valueOf(importe));
                 kilometrosEditText.setText(String.valueOf(kilometros));
                 descripcionEditText.setText(String.valueOf(descripcion));
+                setIconSelection(drawableImagenID);
                 //Activa un radiobutton u otro segun sea Averia o Intervencion
                 if(tipoString.equals("A")){
                     radioButtonAveria.setChecked(true);
@@ -208,7 +217,7 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
     public void guardarIntervencionNueva(){
         String nombre,importe,kilometros,descripcion,fecha,tipo;
         double importeDouble;
-        int kilometrosInt,codigo;
+        int kilometrosInt,codigo,iconSelection;
         //Se recuperan los datos del formulario
         codigo=consultarCodigoBaseDatos();
         fecha=fechaClickableTextView.getText().toString();
@@ -216,6 +225,7 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         importe=importeEditText.getText().toString();
         kilometros=kilometrosEditText.getText().toString();
         descripcion=descripcionEditText.getText().toString();
+        iconSelection=getIconSelection();
         if(radioButtonMantenimiento.isChecked()){
             tipo="M";
         }else{
@@ -237,16 +247,16 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
             SQLiteDatabase bd = bdhelp.getWritableDatabase();
             //Si la base de datos esta abierta.
             if (bd.isOpen()) {
-                //Creamos el objeto ContentValues con los valores a actualizar del registro.
+                /*//Creamos el objeto ContentValues con los valores a actualizar del registro.
                 ContentValues miRegistro = new ContentValues();
                 miRegistro.put("FECHA", fecha);
                 miRegistro.put("NOMBRE", nombre);
                 miRegistro.put("TIPO", tipo);
                 miRegistro.put("IMPORTE", importe);
                 miRegistro.put("KILOMETROS", kilometros);
-                miRegistro.put("DESCRIPCION", descripcion);
+                miRegistro.put("DESCRIPCION", descripcion);*/
                 //Creamos el registro
-                almacenarEnBaseDatos(codigo, nombre, fecha, tipo, importeDouble, kilometrosInt, descripcion, null, R.drawable.icono_mantenimiento);
+                almacenarEnBaseDatos(codigo, nombre, fecha, tipo, importeDouble, kilometrosInt, descripcion, null, iconSelection);
             }
             Toast.makeText(this, "Guardado con exito", Toast.LENGTH_SHORT).show();
             finish();//Cierro el Formulario
@@ -262,13 +272,14 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
     protected void guardarIntervencionEditada(int codigoIntervencion){
         String nombre,importe,kilometros,descripcion,fecha,tipo;
         double importeDouble;
-        int kilometrosInt,codigo=codigoIntervencion;
+        int kilometrosInt,codigo=codigoIntervencion,iconSelection;
         //Se recuperan los datos del formulario
         fecha=fechaClickableTextView.getText().toString();
         nombre=nombreEditText.getText().toString();
         importe=importeEditText.getText().toString();
         kilometros=kilometrosEditText.getText().toString();
         descripcion=descripcionEditText.getText().toString();
+        iconSelection=getIconSelection();
         if(radioButtonMantenimiento.isChecked()){
             tipo="M";
         }else{
@@ -300,6 +311,7 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
                 miRegistro.put("IMPORTE", importeDouble);
                 miRegistro.put("KILOMETROS", kilometrosInt);
                 miRegistro.put("DESCRIPCION", descripcion);
+                miRegistro.put("DRAWABLEIMAGEID",iconSelection);
                 //Actualizamos el registro.
                 bd.update("INTERVENCIONES", miRegistro, "CODIGO=" + codigo, null);
                 bd.close();
@@ -388,9 +400,24 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-
+    /**
+     * Carga la imagen que recibe como parametro en el ImageButton del icono de la
+     * intervencion. Utilizo el metodo .setTag() para almacenar el id y disponer de el en el
+     * .getIconSelection()
+     * @param icon id del recurso tipo Drawable.
+     */
     public static void setIconSelection(int icon){
-        iconSelection=icon;
+        buttonIcon.setImageResource(icon);
+        buttonIcon.setTag(icon);
+    }
+
+    /**
+     * Retorna el recurso de tipo Drawable que esta cargado en el IconButton.
+     * @return el id del recurso de tipo Drawable.
+     */
+    public int getIconSelection(){
+        Integer icon=(Integer)buttonIcon.getTag();
+        return icon;
     }
 
 
