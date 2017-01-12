@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.pc_jorge.app_mant.Formulario"
+    tools:context=".Activities.Formulario"
     android:clickable="true"
     android:orientation="vertical"
     android:weightSum="1">
@@ -31,13 +31,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText_NombreFormulario"
         android:inputType="text"
-        android:text="@string/Introduce_el_nombre"
+        android:hint="@string/Introduce_el_nombre"
         android:layout_row="1"
         android:layout_column="0"
         android:layout_below="@+id/textView_FechaFormulario"
         android:layout_alignRight="@+id/textView_FechaFormulario"
         android:layout_alignEnd="@+id/textView_FechaFormulario"
-        android:layout_toEndOf="@+id/imageButton_IconoFormulario" />
+        android:layout_toEndOf="@+id/imageButton_IconoFormulario"
+        android:focusable="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,17 +51,18 @@
         android:layout_marginTop="53dp"
         android:layout_below="@+id/editText_NombreFormulario"
         android:layout_alignParentStart="true" />
-
+    <!-- Con la propiedad hint el texto por defecto desaparece si el EditText esta vacio -->
     <EditText
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/editText_Kilometros"
-        android:text="@string/Introduce_Klmtrs"
+        android:hint="@string/Introduce_Klmtrs"
         android:maxLength="6"
         android:layout_below="@+id/editText_NombreFormulario"
-        android:layout_alignEnd="@+id/editText_NombreFormulario" />
+        android:layout_alignEnd="@+id/editText_NombreFormulario"
+        android:focusable="true" />
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -78,11 +80,12 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/editText_Importe"
-        android:text="@string/Introduce_coste"
+        android:hint="@string/Introduce_coste"
         android:layout_below="@+id/editText_Kilometros"
         android:layout_alignLeft="@+id/editText_Kilometros"
         android:layout_alignStart="@+id/editText_Kilometros"
-        android:maxLength="5" />
+        android:maxLength="5"
+        android:focusable="true" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -1,19 +1,16 @@
-package com.example.pc_jorge.app_mant;
+package com.example.pc_jorge.app_mant.Activities;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-import android.widget.Toast;
+
+import com.example.pc_jorge.app_mant.R;
 
 /**
- * Crear Fragment con ImageButton para elegir el icono de la intervencion
+ * Crear Dialog_Alert_empty_fields con ImageButton para elegir el icono de la intervencion
  * Crear procedimiento para borrar intervencion
  * Crear menu
  *

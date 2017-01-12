@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Dialogos translucidos con bordes redondeados. Lo he probado pero
+     no se visualiza correctamente el dialog-->
+    <style name="Theme_Dialog_Translucent" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="colorPrimary">#FF33B5E5</item>
+
+    </style>
+
 </resources>

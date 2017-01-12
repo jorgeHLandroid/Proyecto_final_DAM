@@ -1,7 +1,6 @@
-package com.example.pc_jorge.app_mant;
+package com.example.pc_jorge.app_mant.Utilities;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import com.example.pc_jorge.app_mant.R;
 
 /**
  * Created by pc-Jorge on 23/08/2016.

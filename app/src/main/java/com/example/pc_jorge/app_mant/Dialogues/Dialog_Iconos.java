@@ -1,14 +1,18 @@
-package com.example.pc_jorge.app_mant;
+package com.example.pc_jorge.app_mant.Dialogues;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.example.pc_jorge.app_mant.Activities.Formulario;
+import com.example.pc_jorge.app_mant.R;
 
 /**
  * Created by PC-Jorge on 01/01/2017.
@@ -37,6 +41,7 @@ public class Dialog_Iconos extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         View v = inflater.inflate(R.layout.dialog_seleccionar_icono, null);
+
 
         builder.setView(v);
 

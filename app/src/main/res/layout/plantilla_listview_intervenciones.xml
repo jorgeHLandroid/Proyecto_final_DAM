@@ -33,18 +33,8 @@ android:padding="10dp">
     android:layout_toRightOf="@+id/imageViewIcono"
     android:layout_toEndOf="@+id/imageViewIcono" />
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceSmall"
-    android:text="@string/descripcionListView"
-    android:id="@+id/textView_DescripcionListView"
-    android:layout_below="@+id/textView_Kmtrs_listView"
-    android:layout_alignLeft="@+id/textView_Fecha_ListView"
-    android:layout_alignStart="@+id/textView_Fecha_ListView"/>
 
-
-<TextView
+    <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -53,5 +43,16 @@ android:padding="10dp">
     android:layout_below="@+id/textView_Fecha_ListView"
     android:layout_alignLeft="@+id/textView_Fecha_ListView"
     android:layout_alignStart="@+id/textView_Fecha_ListView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/descripcionListView"
+        android:id="@+id/textView_DescripcionListView"
+        android:layout_below="@+id/textView_Kmtrs_listView"
+        android:layout_alignLeft="@+id/textView_Fecha_ListView"
+        android:layout_alignStart="@+id/textView_Fecha_ListView"
+        android:maxLines="3" />
 
 </RelativeLayout>

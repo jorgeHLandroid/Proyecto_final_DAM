@@ -5,6 +5,9 @@
     android:orientation="horizontal"
     android:gravity="center_horizontal">
 
+    <!--android:background="@drawable/dialog_format_rounded" Esta linea era para redondear
+    el dialogo pero no se visualiza correctamente-->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

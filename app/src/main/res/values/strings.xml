@@ -18,8 +18,9 @@
     <string name="Introduce_Averia">Averia</string>
     <string name="Introduce_Mantenimiento">Mantenimiento</string>
     <string name="Registro_editado_con_exito">Registro editado con exito.</string>
-    <string name="Debe_completar_todos_los_campos">\t\t\tFaltan campos por completar.\nEl unico campo que no es obligatorio es la Descripción.</string>
+    <string name="Debe_completar_todos_los_campos">Faltan campos por completar.\nDebes completar todos los campos antes de guardar tu intervención.</string>
     <string name="selecciona_un_icono">Selecciona un icono para la intervención</string>
     <string name="Titulo_DialogIcon">Icono de la intervención</string>
+    <string name="titulo_dialog_advertencia">Error en el Formulario</string>
 
 </resources>

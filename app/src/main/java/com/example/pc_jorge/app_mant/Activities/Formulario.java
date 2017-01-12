@@ -1,4 +1,4 @@
-package com.example.pc_jorge.app_mant;
+package com.example.pc_jorge.app_mant.Activities;
 
 
 import android.app.DatePickerDialog;
@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,11 +17,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.Normalizer;
+import com.example.pc_jorge.app_mant.Dialogues.Dialog_Alert_empty_fields;
+import com.example.pc_jorge.app_mant.Dialogues.Dialog_Iconos;
+import com.example.pc_jorge.app_mant.Utilities.MiBaseDatosHelper;
+import com.example.pc_jorge.app_mant.R;
+
 import java.util.Calendar;
 
 /**
@@ -32,7 +33,7 @@ import java.util.Calendar;
  * Se recibe el argumento 'codigo' desde MainActivity, si es 0 sera un alta nueva, si recibe
  * otro codigo cargara los valores de los campos en el formulario para que puedan ser editados.
  */
-public class Formulario extends AppCompatActivity implements View.OnClickListener {
+public class Formulario extends AppCompatActivity implements View.OnClickListener{
     String nombreBD="miBD";
     static String fecha="Fecha";
     static TextView fechaClickableTextView;
@@ -73,19 +74,29 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         botonCancelar=(Button)findViewById(R.id.button_Cancelar);
         botonCancelar.setOnClickListener(this);
         buttonIcon=(ImageButton)findViewById(R.id.imageButton_IconoFormulario);
+        setIconSelection(R.drawable.question);//Setea el icono de la interrogacion en el buttonIcon
         buttonIcon.setOnClickListener(this);
+
+
 
         //Recojo el codigo pasado por el listView
         Intent intentRecibir=getIntent();
         codigoIntervencion= (Integer) intentRecibir.getExtras().get("codigoIntervencion");
-        Log.d("","Codigo recibido por el Formulario: "+codigoIntervencion);
+                                                                                                    Log.d("","Codigo recibido por el Formulario: "+codigoIntervencion);
         //Si el codigo es 0 significa un alta, cualquier otro numero indica el codigo de la intervención a editar
         if (codigoIntervencion!=0) {
             cargarIntervencion(codigoIntervencion);
         }
     }
 
-    //Escucha el boton Aceptar, Cancelar,Fecha.
+
+
+
+
+    /**
+     * Escucha el boton Aceptar, Cancelar,Fecha.
+     * @param view Instancia del view que se hizo click.
+     */
     @Override
     public void onClick(View view) {
         if(view.getId()== findViewById(R.id.button_AceptarFormulario).getId()) {
@@ -102,7 +113,7 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
             showDatePickerDialog(view);
         }
         if (view.getId() == findViewById(R.id.imageButton_IconoFormulario).getId()) {
-            new Dialog_Iconos().show(getSupportFragmentManager(), "Elige un icono");
+            abrirDialogoIconos();
         }
     }
 
@@ -159,10 +170,10 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
 
    //Recoge la opcion elegida en el DialogFragment
     public void doPositiveClick(){
-        Toast.makeText(this, "Ha pulsado OK", Toast.LENGTH_SHORT).show();
+
     }
     public void doNegativeClick(){
-        Toast.makeText(this, "Ha pulsado Cancelar", Toast.LENGTH_SHORT).show();
+
     }
 
     /**
@@ -247,14 +258,6 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
             SQLiteDatabase bd = bdhelp.getWritableDatabase();
             //Si la base de datos esta abierta.
             if (bd.isOpen()) {
-                /*//Creamos el objeto ContentValues con los valores a actualizar del registro.
-                ContentValues miRegistro = new ContentValues();
-                miRegistro.put("FECHA", fecha);
-                miRegistro.put("NOMBRE", nombre);
-                miRegistro.put("TIPO", tipo);
-                miRegistro.put("IMPORTE", importe);
-                miRegistro.put("KILOMETROS", kilometros);
-                miRegistro.put("DESCRIPCION", descripcion);*/
                 //Creamos el registro
                 almacenarEnBaseDatos(codigo, nombre, fecha, tipo, importeDouble, kilometrosInt, descripcion, null, iconSelection);
             }
@@ -337,8 +340,8 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
                 String textoInformativoString=textoInformativo[y].replaceAll("\\s+", "");
                 if(textoString.equals("")||textoString.equals(textoInformativoString)){
                                                                                                     Log.d("","Ha encontrado vacio o texto inf:  "+textoString);
-                    Toast.makeText(Formulario.this, getString(R.string.Debe_completar_todos_los_campos), Toast.LENGTH_SHORT).show();
-
+                    //Toast.makeText(Formulario.this, getString(R.string.Debe_completar_todos_los_campos), Toast.LENGTH_SHORT).show();
+                    abrirDialogoAdvertencia();
                     return false;
                 }
             }
@@ -374,7 +377,7 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         //Creamos un objeto de la clase auxiliar MiBaseDatosHelper
         MiBaseDatosHelper bdhelp =
                 new MiBaseDatosHelper(this, nombreBD, null, 1);
-                                                                                                     Log.d("","BASE DE DATOS CREADA");
+                                                                                                    Log.d("","BASE DE DATOS CREADA");
         //Abrimos en modo lectura y escritura la base de datos 'MiBD'
         SQLiteDatabase bd = bdhelp.getWritableDatabase();
                                                                                                     Log.d("","BASE DE DATOS INTENTA ABRIR");
@@ -426,19 +429,22 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "Elija la fecha de la intervención");
     }
-    //Abre un dialogFragment con icono .Definido en la clase Fragment
+    //Abre un dialogFragment con icono .Definido en la clase Dialog_Alert_empty_fields
     public void abrirDialogoAdvertencia(){
-        Fragment dialogFragment = Fragment
-                .newInstance("¿Has pulsado Aceptar.¿Deacuerdo??");
-        dialogFragment.show(this.getFragmentManager(), "dialog");
+        Dialog_Alert_empty_fields dialogDialogAlertemptyfields = Dialog_Alert_empty_fields
+                .newInstance("Error al completar el Formulario.");
+        dialogDialogAlertemptyfields.show(this.getFragmentManager(), "dialog");
 
     }
 
     //Abre dialogo de iconos
     public void abrirDialogoIconos(){
-        SelectIconDialog dialogFragment = SelectIconDialog
-                .newInstance("Elije la clase  de intervencion");
-        dialogFragment.show(this.getSupportFragmentManager(),"dialogIconSelect");
+        Dialog_Iconos dialog=new Dialog_Iconos();
+        dialog.setStyle(DialogFragment.STYLE_NORMAL,R.style.Theme_Dialog_Translucent);
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "Elige un icono");
+
+        //Dialog_Iconos dialog=new Dialog_Iconos();
 
     }
 
@@ -448,11 +454,10 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
     public static void setFecha(String fechaPasada) {
         fecha = fechaPasada;
         fechaClickableTextView.setText(fecha);
-
     }
 
     /**
-     * Clase anidada. Crea un Fragment de tipo DatePicker para que el usuario eliga la fecha de la intervencion.
+     * Clase anidada. Crea un Dialog_Alert_empty_fields de tipo DatePicker para que el usuario eliga la fecha de la intervencion.
      *
      */
 
