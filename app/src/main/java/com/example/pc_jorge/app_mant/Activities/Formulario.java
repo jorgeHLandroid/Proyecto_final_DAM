@@ -340,7 +340,6 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
                 String textoInformativoString=textoInformativo[y].replaceAll("\\s+", "");
                 if(textoString.equals("")||textoString.equals(textoInformativoString)){
                                                                                                     Log.d("","Ha encontrado vacio o texto inf:  "+textoString);
-                    //Toast.makeText(Formulario.this, getString(R.string.Debe_completar_todos_los_campos), Toast.LENGTH_SHORT).show();
                     abrirDialogoAdvertencia();
                     return false;
                 }
@@ -489,10 +488,6 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
                     // Month is 0 based so add 1
                     .append(mDay).append("/").append(mMonth + 1).append("/")
                     .append(mYear).append(" ").toString();
-            Toast toast1 =
-                    Toast.makeText(this.getContext(),
-                            "Fecha: "+fecha, Toast.LENGTH_SHORT);
-            toast1.show();
             setFecha(fecha);
         }
     }

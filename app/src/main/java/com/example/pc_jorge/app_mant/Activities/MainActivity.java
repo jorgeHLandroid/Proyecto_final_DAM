@@ -10,13 +10,10 @@ import android.widget.ImageButton;
 import com.example.pc_jorge.app_mant.R;
 
 /**
- * Crear Dialog_Alert_empty_fields con ImageButton para elegir el icono de la intervencion
- * Crear procedimiento para borrar intervencion
- * Crear menu
- *
- *
- *
- *
+ * App que gestionas las intervenciones realizadas en  vehiculos.
+ * Se clasifican en Averias extraordinarioas o Mantenimientos planificados
+ * @version 0.11.2
+ * @author Jorge Huertas
  */
 
 public class MainActivity extends Activity implements OnClickListener{

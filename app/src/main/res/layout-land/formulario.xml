@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Activities.Formulario"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/Introduce_la_fecha"
+        android:id="@+id/textView_FechaFormulario"
+        android:clickable="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <!-- Con la propiedad hint el texto por defecto desaparece si el EditText esta vacio -->
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_Tipo_Formulario"
+        android:layout_alignParentStart="true"
+        android:id="@+id/radioGroup">
+
+    </RadioGroup>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/editTextDescripcionFormulario"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/button_AceptarFormulario"
+        android:layout_below="@+id/textView_Descripcion_Formulario"
+        android:gravity="start" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Aceptar"
+        android:id="@+id/button_AceptarFormulario"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:drawableLeft="@android:drawable/ic_input_add" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroup2"
+        android:layout_below="@+id/editText_Importe"
+        android:layout_alignParentStart="true">
+
+    </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Cancelar"
+        android:id="@+id/button_Cancelar"
+        android:textAllCaps="false"
+        android:layout_alignBottom="@+id/button_AceptarFormulario"
+        android:layout_alignParentEnd="true"
+        android:drawableLeft="@android:drawable/ic_delete"/>
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText_Kilometros"
+        android:hint="@string/Introduce_Klmtrs"
+        android:maxLength="6"
+        android:focusable="true"
+        android:layout_alignBaseline="@+id/editText_NombreFormulario"
+        android:layout_alignBottom="@+id/editText_NombreFormulario"
+        android:layout_toStartOf="@+id/textView_FechaFormulario" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Introduce_Mantenimiento"
+        android:id="@+id/radioButton_Mantenimiento"
+        android:checked="true"
+        android:layout_alignBottom="@+id/imageButton_IconoFormulario"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/descripcionListView"
+        android:id="@+id/textView_Descripcion_Formulario"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignStart="@+id/imageButton_IconoFormulario" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Introduce_Averia"
+        android:id="@+id/radioButton_Averia"
+        android:checked="false"
+        android:layout_alignBaseline="@+id/radioButton_Mantenimiento"
+        android:layout_alignBottom="@+id/radioButton_Mantenimiento"
+        android:layout_alignStart="@+id/editText_Kilometros" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText_Importe"
+        android:hint="@string/Introduce_coste"
+        android:maxLength="5"
+        android:focusable="true"
+        android:layout_alignBaseline="@+id/editText_NombreFormulario"
+        android:layout_alignBottom="@+id/editText_NombreFormulario"
+        android:layout_alignParentEnd="true" />
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageButton_IconoFormulario"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:scaleType="fitStart"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/radioGroup" />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_NombreFormulario"
+        android:inputType="text"
+        android:hint="@string/Introduce_el_nombre"
+        android:focusable="true"
+        android:layout_below="@+id/textView_FechaFormulario"
+        android:layout_toEndOf="@+id/imageButton_IconoFormulario"
+        android:layout_width="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/TipoFormulario"
+        android:id="@+id/textView_Tipo_Formulario"
+        android:layout_alignBaseline="@+id/radioButton_Averia"
+        android:layout_alignBottom="@+id/radioButton_Averia"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

@@ -11,22 +11,7 @@ tools:context=".Activities.MainActivity"
 android:background="@drawable/fondo">
 
 
-<ImageButton
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:id="@+id/imageButton_MainActivity"
-    android:src="@drawable/icono_mantenimiento"
-    android:scaleType="fitCenter"
-    android:background="@android:color/transparent"
-    android:layout_marginTop="86dp"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:layout_marginLeft="53dp"
-    android:layout_marginStart="53dp"
-    android:clickable="true" />
-
-<ImageButton
+    <ImageButton
     android:layout_width="100dp"
     android:layout_height="100dp"
     android:id="@+id/imageButton_Salir_MainActivity"
@@ -38,17 +23,51 @@ android:background="@drawable/fondo">
     android:layout_alignParentRight="true"
     android:layout_alignParentEnd="true" />
 
-<ImageButton
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:id="@+id/imageButton_Anadir_MainActivity"
-    android:scaleType="fitCenter"
-    android:background="@android:color/transparent"
-    android:src="@drawable/anyadir"
-    android:clickable="true"
-    android:layout_alignTop="@+id/imageButton_MainActivity"
-    android:layout_toRightOf="@+id/imageButton_MainActivity"
-    android:layout_toEndOf="@+id/imageButton_MainActivity"
-    android:layout_marginLeft="43dp"
-    android:layout_marginStart="43dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+    </LinearLayout>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_alignParentStart="true">
+
+        <ImageButton
+        android:layout_width="142dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageButton_MainActivity"
+        android:src="@drawable/icono_mantenimiento"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginStart="0dp"
+        android:clickable="true"
+            android:layout_gravity="center_vertical" />
+
+        <ImageButton
+            android:layout_width="146dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageButton_Anadir_MainActivity"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/anyadir"
+            android:clickable="true"
+            android:layout_alignTop="@+id/imageButton_MainActivity"
+            android:layout_toRightOf="@+id/imageButton_MainActivity"
+            android:layout_toEndOf="@+id/imageButton_MainActivity"
+            android:layout_marginLeft="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_gravity="center_vertical" />
+    </TableRow>
+
 </RelativeLayout>

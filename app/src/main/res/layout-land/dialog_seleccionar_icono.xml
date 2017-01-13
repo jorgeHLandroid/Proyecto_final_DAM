@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_horizontal">
+
+    <!--android:background="@drawable/dialog_format_rounded" Esta linea era para redondear
+    el dialogo pero no se visualiza correctamente-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/Titulo_DialogIcon"
+        android:id="@+id/textView_DialogIcono"
+        android:layout_column="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/selecciona_un_icono"
+        android:id="@+id/textView_DialogIconText"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageButton_DialogIconoHidraulica"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:src="@drawable/hidraulica"
+            android:scaleType="fitCenter"
+            android:layout_below="@+id/imageButton_DialogIconoNeumatica"
+            android:layout_toEndOf="@+id/imageButton_DialogIconoMecanica"
+            android:layout_column="1"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp" />
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageButton_DialogIconoElectrica"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:src="@drawable/electrica"
+            android:scaleType="fitCenter"
+            android:layout_above="@+id/imageButton_DialogIconoHidraulica"
+            android:layout_toEndOf="@+id/imageButton_DialogIconoNeumatica"
+            android:contentDescription="Icono que corresponde a intervencion electrica"
+            android:layout_column="2"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp" />
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageButton_DialogIconoMecanica"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:src="@drawable/mecanica"
+            android:scaleType="fitCenter"
+            android:layout_below="@+id/imageButton_DialogIconoNeumatica"
+            android:layout_alignParentStart="true"
+            android:layout_column="1"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp" />
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageButton_DialogIconoNeumatica"
+            android:layout_marginTop="0dp"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:src="@drawable/neumatica"
+            android:scaleType="fitCenter"
+            android:layout_alignParentTop="true"
+            android:layout_column="2"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp" />
+    </TableRow>
+
+</TableLayout>

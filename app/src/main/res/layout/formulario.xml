@@ -123,7 +123,8 @@
         android:layout_column="0"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:drawableLeft="@android:drawable/ic_input_add" />
 
     <ImageButton
         android:layout_width="100dp"
@@ -132,7 +133,6 @@
         android:background="@android:color/transparent"
         android:clickable="true"
         android:scaleType="fitStart"
-        android:src="@drawable/question"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_alignParentTop="true"
@@ -166,7 +166,6 @@
     </RadioGroup>
 
     <Button
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Cancelar"
         android:id="@+id/button_Cancelar"
@@ -174,6 +173,8 @@
         android:layout_column="0"
         android:textAllCaps="false"
         android:layout_alignBottom="@+id/button_AceptarFormulario"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:drawableLeft="@android:drawable/ic_delete" />
 
 </RelativeLayout>
