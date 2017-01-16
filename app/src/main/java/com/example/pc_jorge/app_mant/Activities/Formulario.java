@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import com.example.pc_jorge.app_mant.Dialogues.Dialog_Alert_empty_fields;
 import com.example.pc_jorge.app_mant.Dialogues.Dialog_Iconos;
-import com.example.pc_jorge.app_mant.Utilities.MiBaseDatosHelper;
+import com.example.pc_jorge.app_mant.Auxiliar.MiBaseDatosHelper;
 import com.example.pc_jorge.app_mant.R;
 
 import java.util.Calendar;
@@ -46,7 +46,7 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
     private double importePasado;
     private int kilometrosPasado,drawableImageIdPasado,codigoPasado,codigoIntervencion;
     EditText nombreEditText,importeEditText,kilometrosEditText,descripcionEditText;
-    //Indicara el tipo de icono de la intervencion es statico para accedera al metodo set desde otra clase.
+    //Indicara el tipo de icono de la intervencion es estatico para accedera al metodo set desde otra clase.
     private static int iconSelection;
 
     @Override
@@ -102,8 +102,6 @@ public class Formulario extends AppCompatActivity implements View.OnClickListene
         if(view.getId()== findViewById(R.id.button_AceptarFormulario).getId()) {
             if (codigoIntervencion==0){
                 guardarIntervencionNueva();
-                //abrirDialogoAdvertencia();
-                //abrirDialogoIconos();
             }else{
                 guardarIntervencionEditada(codigoIntervencion);
             }

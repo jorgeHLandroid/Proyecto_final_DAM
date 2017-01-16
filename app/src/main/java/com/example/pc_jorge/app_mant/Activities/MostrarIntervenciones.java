@@ -12,9 +12,9 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
 
-import com.example.pc_jorge.app_mant.Utilities.AdaptadorMostrarIntervenciones;
-import com.example.pc_jorge.app_mant.Utilities.Intervencion;
-import com.example.pc_jorge.app_mant.Utilities.MiBaseDatosHelper;
+import com.example.pc_jorge.app_mant.Auxiliar.AdaptadorMostrarIntervenciones;
+import com.example.pc_jorge.app_mant.Intervencion;
+import com.example.pc_jorge.app_mant.Auxiliar.MiBaseDatosHelper;
 import com.example.pc_jorge.app_mant.R;
 
 import java.util.ArrayList;

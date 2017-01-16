@@ -74,19 +74,6 @@
 
     </RadioGroup>
 
-    <EditText
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editText_Importe"
-        android:hint="@string/Introduce_coste"
-        android:layout_below="@+id/editText_Kilometros"
-        android:layout_alignLeft="@+id/editText_Kilometros"
-        android:layout_alignStart="@+id/editText_Kilometros"
-        android:maxLength="5"
-        android:focusable="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -176,5 +163,28 @@
         android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:drawableLeft="@android:drawable/ic_delete" />
+
+    <TextView
+        android:text="€"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView_moneda_Formulario"
+        android:layout_alignBaseline="@+id/textView_Tipo_Formulario"
+        android:layout_alignBottom="@+id/textView_Tipo_Formulario"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText_Importe"
+        android:hint="@string/Introduce_coste"
+        android:maxLength="5"
+        android:focusable="true"
+        android:layout_below="@+id/editText_Kilometros"
+        android:layout_alignStart="@+id/editText_Kilometros"
+        android:layout_toStartOf="@+id/textView_moneda_Formulario" />
 
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.example.pc_jorge.app_mant.Utilities;
+package com.example.pc_jorge.app_mant.Auxiliar;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pc_jorge.app_mant.Intervencion;
 import com.example.pc_jorge.app_mant.R;
 
 /**
